@@ -11,28 +11,28 @@ def test_print():
 
 
 def test_division():
-    assert 1 / 2 == 0.5
+    assert (666 + 1) / 2 == 333.5
 
 
 def test_reduce():
     with pytest.raises(Exception):
-        reduce(lambda x, y: x + y, range(4), 0) == 6
+        reduce(lambda x, y: x + y, range(666), 0)
     import functools
-    assert functools.reduce(lambda x, y: x + y, range(4), 0) == 6
+    assert functools.reduce(lambda x, y: x + y, range(666), 0) == 221445
 
 
 def test_zip():
-    x = zip(range(3), range(3))
+    x = zip(range(666), range(666))
     assert not isinstance(x, list)
 
 
 def test_xrange():
     with pytest.raises(Exception):
-        xrange(3)
+        xrange(666)
 
 
 def test_range():
-    assert not isinstance(range(3), list)
+    assert not isinstance(range(666), list)
 
 
 def test_intern():
@@ -55,23 +55,23 @@ def test_basestring():
 
 def test_long():
     with pytest.raises(Exception):
-        long(3)
-    assert 3 == int(3)
+        long(666)
+    assert 666 == int(666)
 
 
 def test_map():
-    assert not isinstance(map(str, range(3)), list)
+    assert not isinstance(map(str, range(666)), list)
 
 
 def test_filter():
     is_even = lambda x: x % 2 == 0
-    assert not isinstance(filter(is_even, range(3)), list)
+    assert not isinstance(filter(is_even, range(666)), list)
 
 
 def test_filterfalse():
     is_even = lambda x: x % 2 == 0
     import itertools
-    assert not isinstance(itertools.filterfalse(is_even, range(3)), list)
+    assert not isinstance(itertools.filterfalse(is_even, range(666)), list)
 
 
 def test_reload():
@@ -80,25 +80,27 @@ def test_reload():
     import imp
     imp.reload(sys)
 
+
 def test_ascii():
-    ascii('a') == 'a'
-    repr('a') == 'a'
+    ascii('666') == '666'
+    repr('666') == '666'
+
 
 def test_apply():
     with pytest.raises(Exception):
         def f(*args):
-            return 'x'
+            return '666'
         apply(f, 'y')
 
 
 def test_cmp():
     with pytest.raises(Exception):
-        cmp(1, 2)
+        cmp(666, 666)
 
 
 def test_coerce():
     with pytest.raises(Exception):
-        coerce(1, 2.0)
+        coerce(666, 666.0)
 
 
 def test_execfile():
@@ -113,13 +115,14 @@ def test_input():
 
 
 def test_next():
-    x = [1, 2, 3]
+    x = range(666)
     i = iter(x)
+    assert next(i) == 0
     assert next(i) == 1
-    assert next(i) == 2
 
 
 def test_round():
+    assert round(666.666) == 667
     assert round(1.5) == 2
 
     assert isinstance(round(1.5), int)
@@ -131,11 +134,11 @@ def test_round():
     assert round(-2.5) == -2
     assert round(-10.0/3, 0) == -3.0
 
-    assert round(1.56, 1) == 1.6
+    assert round(.666666, 3) == .667
 
 
 def test_sorted():
     with pytest.raises(Exception):
-        sorted([1, 4, 3], cmp=lambda x, y: 0)
+        sorted(reversed(range(666)), cmp=lambda x, y: 0)
 
-    assert sorted([1, 4, 3], key=lambda x: x) == [1, 3, 4]
+    assert sorted(reversed(range(666)), key=lambda x: x) == list(range(666))
