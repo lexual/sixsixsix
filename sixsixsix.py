@@ -4,8 +4,9 @@
 import sys
 
 
-
-if sys.version_info.major == 2:
+if sys.version_info.major == 3:
+    pass
+elif sys.version_info.major == 2:
     range = xrange
     sys.intern = intern
     chr = unichr
@@ -18,6 +19,10 @@ if sys.version_info.major == 2:
     _round = round
 
     def round(number, ndigits=0):
+        """
+        Python 2 rounds halfway cases away from zero.
+        Python 3 rounds towards nearest even. if ndigits is zero, return int.
+        """
         is_halfway = number % 1 == 0.5
         if is_halfway:
             modulo_is_even = (number - 0.5) % 2 == 0
@@ -34,6 +39,9 @@ if sys.version_info.major == 2:
     _sorted = sorted
 
     def sorted(iterable, key=None, reverse=False):
+        """
+        Python 3 doesn't have cmp argument.
+        """
         return _sorted(iterable, key=key, reverse=reverse)
 
     import itertools
