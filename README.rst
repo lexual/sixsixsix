@@ -41,7 +41,7 @@ Useful for:
 * Training muscle memory to write python 3 code, and avoid obsolete python 
   2-isms.
   
-six = three times two.
+six = 2 * 3
 
 sixsixsix = 'six' * 3
 
